@@ -107,7 +107,7 @@
                     message += `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
                 });
                 message += `\nTotal: ${cartTotal.textContent}`;
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                const whatsappUrl = `https://wa.me/2236991461?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
             });
         });
@@ -117,7 +117,7 @@
   <header class="bg-[#D9C0B9] shadow-md fixed w-full top-0 z-10 transition duration-300">
    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-[#8AA097]">
-     <a href="/index.html">
+     <a href="../index.html">
       NUGCHEKUME
      </a>
     </h1>
@@ -128,7 +128,7 @@
     <nav class="hidden sm:flex" id="menu">
      <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
       <li>
-       <a class="text-[#8AA097] hover:text-gray-800" href="/index.html">
+       <a class="text-[#8AA097] hover:text-gray-800" href="../index.html">
         Inicio
        </a>
       </li>
@@ -259,14 +259,11 @@
        <i class="fab fa-twitter">
        </i>
       </a>
-      <a href="https://www.instagram.com" target="_blank">
+      <a href="https://www.instagram.com/nugche_kume/" target="_blank">
        <i class="fab fa-instagram">
        </i>
       </a>
-      <a href="https://www.linkedin.com" target="_blank">
-       <i class="fab fa-linkedin-in">
-       </i>
-      </a>
+
      </div>
     </div>
    </footer>
