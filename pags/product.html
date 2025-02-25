@@ -1,21 +1,22 @@
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Carrito de Compras - Productos de Cosmética
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
-  <style>
-   .bg-semi-transparent {
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Carrito de Compras - Productos de Cosmética
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        .bg-semi-transparent {
             background-color: rgba(217, 192, 185, 0.9);
         }
-  </style>
-  <script>
-   document.addEventListener('DOMContentLoaded', function() {
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             const cart = [];
             const cartButton = document.querySelectorAll('.add-to-cart');
             const cartIcon = document.getElementById('cart-icon');
@@ -29,7 +30,7 @@
             const header = document.querySelector('header');
 
             cartButton.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const quantityInput = this.previousElementSibling;
                     const quantity = parseInt(quantityInput.value) || 1;
                     const product = {
@@ -49,15 +50,15 @@
                 });
             });
 
-            cartIcon.addEventListener('click', function() {
+            cartIcon.addEventListener('click', function () {
                 cartContainer.classList.toggle('hidden');
             });
 
-            menuToggle.addEventListener('click', function() {
+            menuToggle.addEventListener('click', function () {
                 menu.classList.toggle('hidden');
             });
 
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', function () {
                 if (window.scrollY > 50) {
                     header.classList.add('bg-semi-transparent');
                 } else {
@@ -89,7 +90,7 @@
                 cartCount.textContent = itemCount;
 
                 document.querySelectorAll('.remove-item').forEach(button => {
-                    button.addEventListener('click', function() {
+                    button.addEventListener('click', function () {
                         const index = this.dataset.index;
                         if (cart[index].quantity > 1) {
                             cart[index].quantity -= 1;
@@ -101,7 +102,7 @@
                 });
             }
 
-            checkoutButton.addEventListener('click', function() {
+            checkoutButton.addEventListener('click', function () {
                 let message = 'Hola, me gustaría comprar los siguientes productos:\n\n';
                 cart.forEach(item => {
                     message += `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
@@ -111,161 +112,489 @@
                 window.open(whatsappUrl, '_blank');
             });
         });
-  </script>
- </head>
- <body class="font-roboto bg-[#8AA097]">
-  <header class="bg-[#D9C0B9] shadow-md fixed w-full top-0 z-10 transition duration-300">
-   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-[#8AA097]">
-     <a href="../index.html">
-      NUGCHEKUME
-     </a>
-    </h1>
-    <button class="text-[#8AA097] sm:hidden" id="menu-toggle">
-     <i class="fas fa-bars">
-     </i>
-    </button>
-    <nav class="hidden sm:flex" id="menu">
-     <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-      <li>
-       <a class="text-[#8AA097] hover:text-gray-800" href="../index.html">
-        Inicio
-       </a>
-      </li>
-      <li>
-       <a class="text-[#8AA097] hover:text-gray-800" href="#producto">
-        Productos
-       </a>
-      </li>
-      <li class="relative">
-       <a class="text-[#8AA097] hover:text-gray-800 cursor-pointer" id="cart-icon">
-        Carrito
-        <i class="fas fa-shopping-cart">
-        </i>
-        <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" id="cart-count">
-         0
-        </span>
-       </a>
-      </li>
-     </ul>
-    </nav>
-   </div>
-  </header>
-  <main class="container mx-auto px-4 py-8 mt-16">
-   <h1 class="text-3xl font-bold text-[#D9C0B9] mb-6">
-    Nuestros Productos
-   </h1>
-   <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
-    Cremas
-   </h2>
-   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover" height="300" src="../img/cremaFacialHialuronico.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Crema Facial Hialuronico
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Crema facial hidratante y nutritiva, sus ácidos grasos no permiten que la piel se reseque y se vea opaca. Ayuda con la generación de colágeno generando resistencia y elasticidad en la piel. Siendo parte de tu rutina facial te ayudará a mejorar la elasticidad de tu piel y a mantenerla firme, luminosa e hidratada. Ideal para pieles secas
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $20.000
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Crema Facial Hialuronico" data-price="20000.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida" class="w-full h-64 object-cover" height="300" src="../img/cremaFacialNiacinamida.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Crema Facial Niacinamida
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Crema facial ideal para pieles mixtas y grasas, matifica la piel regulando la producción de sebo y controlando la aparición de acne, hidrata y suaviza la piel. La niacinamida también te ayudará a unificar el tono de la piel y eliminar las marcas que quedaron de anteriores brotes.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $20.000
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Crema Facial Niacinamida" data-price="20000.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-   </div>
-   <br>
-   <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
-    Shampoo
-   </h2>
-   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de shampoo sólido personalizado" class="w-full h-48 object-cover" height="300" src="../img/shampooSolido.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Shampoo sólido personalizado
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Ideamos el shampoo que tu cabello necesita. Una barra de 70 gr de activos. Para cabello seco - graso - normal - con caspa - para la caída. Activos a elección como queratina y colágeno
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $9.500
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Shampoo sólido personalizado" data-price="9500.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-   </div>
-  </main>
-  <div class="hidden fixed top-16 right-4 bg-white shadow-md rounded-lg p-4 w-80" id="cart-container">
-   <h2 class="text-2xl font-bold text-[#D9C0B9] mb-4">
-    Carrito de Compras
-   </h2>
-   <div id="cart-items">
-   </div>
-   <div class="flex justify-between items-center mt-4">
-    <span class="text-xl font-bold text-[#D9C0B9]">
-     Total:
-    </span>
-    <span class="text-xl font-bold text-[#D9C0B9]" id="cart-total">
-     $0.00
-    </span>
-   </div>
-   <button class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 w-full" id="checkout-button">
-    Finalizar Compra
-   </button>
-  </div>
-  <footer class="bg-[#D9C0B9] text-white py-12">
-    <div class="container mx-auto text-center">
-     <p>
-      © 2025 NUGCHEKUME. Todos los derechos reservados a Tomas Elia Gimenez.
-     </p>
-     <div class="flex justify-center space-x-4 mt-4">
-      <a href="https://www.facebook.com" target="_blank">
-       <i class="fab fa-facebook-f">
-       </i>
-      </a>
-      <a href="https://www.twitter.com" target="_blank">
-       <i class="fab fa-twitter">
-       </i>
-      </a>
-      <a href="https://www.instagram.com/nugche_kume/" target="_blank">
-       <i class="fab fa-instagram">
-       </i>
-      </a>
+    </script>
+</head>
 
-     </div>
+<body class="font-roboto bg-[#8AA097]">
+    <header class="bg-[#D9C0B9] shadow-md fixed w-full top-0 z-10 transition duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-[#8AA097]">
+                <a href="../index.html">
+                    NUGCHEKUME
+                </a>
+            </h1>
+            <button class="text-[#8AA097] sm:hidden" id="menu-toggle">
+                <i class="fas fa-bars">
+                </i>
+            </button>
+            <nav class="hidden sm:flex" id="menu">
+                <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                    <li>
+                        <a class="text-[#8AA097] hover:text-gray-800" href="../index.html">
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-[#8AA097] hover:text-gray-800" href="#producto">
+                            Productos
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a class="text-[#8AA097] hover:text-gray-800 cursor-pointer" id="cart-icon">
+                            Carrito
+                            <i class="fas fa-shopping-cart">
+                            </i>
+                            <span
+                                class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
+                                id="cart-count">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8 mt-16">
+        <h1 class="text-3xl font-bold text-[#D9C0B9] mb-6">
+            Nuestros Productos
+        </h1>
+
+        <br>
+        <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+            Cremas
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover"
+                    height="300" src="../img/cremaFacialHialuronico.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Crema Facial Hialuronico
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Crema facial hidratante y nutritiva, sus ácidos grasos no permiten que la piel se reseque y se
+                        vea opaca. Ayuda con la generación de colágeno generando resistencia y elasticidad en la piel.
+                        Siendo parte de tu rutina facial te ayudará a mejorar la elasticidad de tu piel y a mantenerla
+                        firme, luminosa e hidratada. Ideal para pieles secas
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $20.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Hialuronico" data-price="20000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                    class="w-full h-64 object-cover" height="300" src="../img/cremaFacialNiacinamida.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Crema Facial Niacinamida
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Crema facial ideal para pieles mixtas y grasas, matifica la piel regulando la producción de sebo
+                        y controlando la aparición de acne, hidrata y suaviza la piel. La niacinamida también te ayudará
+                        a unificar el tono de la piel y eliminar las marcas que quedaron de anteriores brotes.
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $20.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Niacinamida" data-price="20000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+            Mascarillas
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover"
+                    height="300" src="../img/mascarillaCoco.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Mascarilla de Coco
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        La mascarilla de coco y queratina te va a brindar una hidratación profunda, gracias a los ácidos
+                        grasos que contiene el coco nutrita tu pelo en una sola aplicación, la queratina trabaja para
+                        reparar el daño y reconstruir la estructura dañada, reduciendo la aparición de puntas abiertas y
+                        rotura, mejorará la elasticidad y se verá más luminoso y suave
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $9.500
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Hialuronico" data-price="9500.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                    class="w-full h-64 object-cover" height="300" src="../img/mascarillaFacial.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Mascarilla facial
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Contiene 100 gr de arcilla roja + 50 cc de agua desmineralizada uso cosmetico. Como se utiliza ?
+                        Verti la cantidad de arcilla que vayas a utilizar, humedecela con el agua hasta formar un barro,
+                        aplica sobre el rostro y deja actuar 20 minutos, enjuagar . Evita el contacto con los ojos. Está
+                        arcilla te va a ayudar a controlar el sebo de la piel y evitar el acne. Evitar manipular la
+                        arcilla con productos metálicos, utilizar utensilios de silicona, madera o plástico
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $20.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Niacinamida" data-price="20000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br>
+        <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+            Shampoo/acondicionadores
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover"
+                    height="300" src="../img/shampooSolido.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Shampoo sólido personalizado
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Ideamos el shampoo que tu cabello necesita. Una barra de 70 gr de activos. Para cabello seco -
+                        graso - normal - con caspa - para la caída. Activos a elección como queratina y colágeno
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $9.500
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Hialuronico" data-price="9500.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                    class="w-full h-64 object-cover" height="300" src="../img/barraAcondicionador.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Barra acondicionador
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Nuestra barra acondicionador contiene manteca de karite , manteca de cacao y cera de abeja, te
+                        va a hidratar y nutrir el cabello dañado, te ayudará con la batalla contra el frizz y las puntas
+                        abiertas!
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $9.500
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Niacinamida" data-price="9500.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+            Mantecas
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover"
+                    height="300" src="../img/mantecaCorporal.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Manteca corporales
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Ideal para hidratar y regentar tu piel.
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $20.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Hialuronico" data-price="20000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                    class="w-full h-64 object-cover" height="300" src="../img/MantecaManos.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Manteca Manos
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Re constructora y reparadora de la piel! Ideal para manos y áreas resecas como codos y talones
+                        agrietados.
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $10.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Niacinamida" data-price="10000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+            PROMOCIONES
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover"
+                    height="300" src="../img/kitSkincare.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        KIT SKINCARE
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        El Kits skincare contiene: 1 limpiador facial - 1 tonico - 1 sérum - 1 crema facial
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $60.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Hialuronico" data-price="60000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+            VARIOS
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                    class="w-full h-64 object-cover" height="300" src="../img/BARRAlIMPIEZAaVENA.jpg" width="300" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-[#8AA097]">
+                        Barra de limpieza AVENA
+                    </h3>
+                    <p class="text-gray-600 mt-2">
+                        Esta barra de limpieza está elaborada principalmente para limpiar el rostro y eliminar la
+                        suciedad, el maquillaje y las impurezas, contiene Betania de coco, hidratante natural que te
+                        ayudará a mantener la humedad en la piel, avena, exfoliante natural, reduce la aparición de
+                        poros, controla el acne, humecta e hidrata, arcilla caolin y tea-tree, aceite antibacteriano y
+                        antifúngico que puede ayudar a eliminar la bacteria y los hongos que causan el acne.
+                    </p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-[#8AA097] font-bold">
+                            $10.000
+                        </span>
+                        <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                        <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                            data-name="Crema Facial Niacinamida" data-price="10000.00">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        
+        <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+            <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                class="w-full h-64 object-cover" height="300" src="../img/TónicoAguadeRosas.jpg" width="300" />
+            <div class="p-4">
+                <h3 class="text-lg font-semibold text-[#8AA097]">
+                    Tónico agua de rosas
+                </h3>
+                <p class="text-gray-600 mt-2">
+                    El agua de rosas es un liquido que se obtiene a partir de la destilación de pétalos de rosas
+                    frescas. Esta agua trae con ella varias propiedades: Te brinda una hidratación fresca y natural. Te
+                    va a ayudar a reducir la inflamación, ideal para después de una exfoliación o limpieza, incluso
+                    luego de afeitar , descongestiona reduciendo el enrojecimiento de la piel y es antibacteriano, lo
+                    que te ayudará a reducir el acne y regular el ph de la piel.
+                </p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-[#8AA097] font-bold">
+                        $10.000
+                    </span>
+                    <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                    <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                        data-name="Crema Facial Niacinamida" data-price="10000.00">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+
+
+        <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+            <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                class="w-full h-64 object-cover" height="300" src="../img/MouseLimpieza.jpg" width="300" />
+            <div class="p-4">
+                <h3 class="text-lg font-semibold text-[#8AA097]">
+                    Mousse de limpieza facial
+                </h3>
+                <p class="text-gray-600 mt-2">
+                    Nuestro mousse de limpieza facial actúa como agente limpiador eliminando la suciedad acumulada
+                    durante el día dejando una piel limpia para la posterior aplicacion de productos humectantes.Ideal
+                    para pieles sensibles
+                </p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-[#8AA097] font-bold">
+                        $14.000
+                    </span>
+                    <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                    <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                        data-name="Crema Facial Niacinamida" data-price="14000.00">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+       
+        <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+            <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida"
+                class="w-full h-64 object-cover" height="300" src="../img/Difusores.jpg" width="300" />
+            <div class="p-4">
+                <h3 class="text-lg font-semibold text-[#8AA097]">
+                    Difusores
+                </h3>
+                <p class="text-gray-600 mt-2">
+                    Lleva los más ricos aromas de la naturaleza a tu hogar: coco - Lemongrass - citronella - rosas -
+                    Pitanga - vainilla - maracuyá
+                </p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-[#8AA097] font-bold">
+                        $13.000
+                    </span>
+                    <input class="w-16 text-center border rounded" min="1" type="number" value="1" />
+                    <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart"
+                        data-name="Crema Facial Niacinamida" data-price="13000.00">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+    <div class="hidden fixed top-16 right-4 bg-white shadow-md rounded-lg p-4 w-80" id="cart-container">
+        <h2 class="text-2xl font-bold text-[#D9C0B9] mb-4">
+            Carrito de Compras
+        </h2>
+        <div id="cart-items">
+        </div>
+        <div class="flex justify-between items-center mt-4">
+            <span class="text-xl font-bold text-[#D9C0B9]">
+                Total:
+            </span>
+            <span class="text-xl font-bold text-[#D9C0B9]" id="cart-total">
+                $0.00
+            </span>
+        </div>
+        <button class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 w-full" id="checkout-button">
+            Finalizar Compra
+        </button>
     </div>
-   </footer>
- </body>
+    <footer class="bg-[#D9C0B9] text-white py-12">
+        <div class="container mx-auto text-center">
+            <p>
+                © 2025 NUGCHEKUME. Todos los derechos reservados a Tomas Elia Gimenez.
+            </p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="https://www.facebook.com" target="_blank">
+                    <i class="fab fa-facebook-f">
+                    </i>
+                </a>
+                <a href="https://www.twitter.com" target="_blank">
+                    <i class="fab fa-twitter">
+                    </i>
+                </a>
+                <a href="https://www.instagram.com/nugche_kume/" target="_blank">
+                    <i class="fab fa-instagram">
+                    </i>
+                </a>
+
+            </div>
+        </div>
+    </footer>
+</body>
+
 </html>
