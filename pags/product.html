@@ -11,116 +11,119 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
   <style>
    .bg-semi-transparent {
-      background-color: rgba(217, 192, 185, 0.9);
-    }
+            background-color: rgba(217, 192, 185, 0.9);
+        }
   </style>
   <script>
    document.addEventListener('DOMContentLoaded', function() {
-      const cart = [];
-      const cartButton = document.querySelectorAll('.add-to-cart');
-      const cartIcon = document.getElementById('cart-icon');
-      const cartContainer = document.getElementById('cart-container');
-      const cartItemsContainer = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      const cartCount = document.getElementById('cart-count');
-      const checkoutButton = document.getElementById('checkout-button');
-      const menuToggle = document.getElementById('menu-toggle');
-      const menu = document.getElementById('menu');
-      const header = document.querySelector('header');
+            const cart = [];
+            const cartButton = document.querySelectorAll('.add-to-cart');
+            const cartIcon = document.getElementById('cart-icon');
+            const cartContainer = document.getElementById('cart-container');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const cartCount = document.getElementById('cart-count');
+            const checkoutButton = document.getElementById('checkout-button');
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('menu');
+            const header = document.querySelector('header');
 
-      cartButton.forEach(button => {
-        button.addEventListener('click', function() {
-          const quantityInput = this.previousElementSibling;
-          const quantity = parseInt(quantityInput.value) || 1;
-          const product = {
-            name: this.dataset.name,
-            price: parseFloat(this.dataset.price),
-            quantity: quantity
-          };
+            cartButton.forEach(button => {
+                button.addEventListener('click', function() {
+                    const quantityInput = this.previousElementSibling;
+                    const quantity = parseInt(quantityInput.value) || 1;
+                    const product = {
+                        name: this.dataset.name,
+                        price: parseFloat(this.dataset.price),
+                        quantity: quantity
+                    };
 
-          const existingProductIndex = cart.findIndex(item => item.name === product.name);
-          if (existingProductIndex > -1) {
-            cart[existingProductIndex].quantity += product.quantity;
-          } else {
-            cart.push(product);
-          }
+                    const existingProductIndex = cart.findIndex(item => item.name === product.name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity += product.quantity;
+                    } else {
+                        cart.push(product);
+                    }
 
-          updateCart();
-        });
-      });
+                    updateCart();
+                });
+            });
 
-      cartIcon.addEventListener('click', function() {
-        cartContainer.classList.toggle('hidden');
-      });
+            cartIcon.addEventListener('click', function() {
+                cartContainer.classList.toggle('hidden');
+            });
 
-      menuToggle.addEventListener('click', function() {
-        menu.classList.toggle('hidden');
-      });
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('hidden');
+            });
 
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-          header.classList.add('bg-semi-transparent');
-        } else {
-          header.classList.remove('bg-semi-transparent');
-        }
-      });
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-semi-transparent');
+                } else {
+                    header.classList.remove('bg-semi-transparent');
+                }
+            });
 
-      function updateCart() {
-        cartItemsContainer.innerHTML = '';
-        let total = 0;
-        let itemCount = 0;
+            function updateCart() {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                let itemCount = 0;
 
-        cart.forEach((item, index) => {
-          const itemTotal = item.price * item.quantity;
-          total += itemTotal;
-          itemCount += item.quantity;
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    itemCount += item.quantity;
 
-          const cartItem = document.createElement('div');
-          cartItem.classList.add('flex', 'justify-between', 'items-center', 'py-2');
-          cartItem.innerHTML = `
-            <span>${item.name} (x${item.quantity})</span>
-            <span>$${itemTotal.toFixed(2)}</span>
-            <button class="text-red-500 hover:text-red-700 remove-item" data-index="${index}">&times;</button>
-          `;
-          cartItemsContainer.appendChild(cartItem);
-        });
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('flex', 'justify-between', 'items-center', 'py-2');
+                    cartItem.innerHTML = `
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>$${itemTotal.toFixed(2)}</span>
+                        <button class="text-red-500 hover:text-red-700 remove-item" data-index="${index}">&times;</button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
 
-        cartTotal.textContent = `$${total.toFixed(2)}`;
-        cartCount.textContent = itemCount;
+                cartTotal.textContent = `$${total.toFixed(2)}`;
+                cartCount.textContent = itemCount;
 
-        document.querySelectorAll('.remove-item').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = this.dataset.index;
-            if (cart[index].quantity > 1) {
-              cart[index].quantity -= 1;
-            } else {
-              cart.splice(index, 1);
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.dataset.index;
+                        if (cart[index].quantity > 1) {
+                            cart[index].quantity -= 1;
+                        } else {
+                            cart.splice(index, 1);
+                        }
+                        updateCart();
+                    });
+                });
             }
-            updateCart();
-          });
-        });
-      }
 
-      checkoutButton.addEventListener('click', function() {
-        let message = 'Hola, me gustaría comprar los siguientes productos:\n\n';
-        cart.forEach(item => {
-          message += `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+            checkoutButton.addEventListener('click', function() {
+                let message = 'Hola, me gustaría comprar los siguientes productos:\n\n';
+                cart.forEach(item => {
+                    message += `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+                });
+                message += `\nTotal: ${cartTotal.textContent}`;
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
         });
-        message += `\nTotal: ${cartTotal.textContent}`;
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-      });
-    });
   </script>
  </head>
  <body class="font-roboto bg-[#8AA097]">
   <header class="bg-[#D9C0B9] shadow-md fixed w-full top-0 z-10 transition duration-300">
    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-[#8AA097]">
-     <a href="/index.html">Cosmética Shop</a>
+     <a href="/index.html">
+      NUGCHEKUME
+     </a>
     </h1>
     <button class="text-[#8AA097] sm:hidden" id="menu-toggle">
-     <i class="fas fa-bars"></i>
+     <i class="fas fa-bars">
+     </i>
     </button>
     <nav class="hidden sm:flex" id="menu">
      <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
@@ -134,7 +137,6 @@
         Productos
        </a>
       </li>
-
       <li class="relative">
        <a class="text-[#8AA097] hover:text-gray-800 cursor-pointer" id="cart-icon">
         Carrito
@@ -150,194 +152,103 @@
    </div>
   </header>
   <main class="container mx-auto px-4 py-8 mt-16">
-   <h2 class="text-3xl font-bold text-[#D9C0B9] mb-6">
+   <h1 class="text-3xl font-bold text-[#D9C0B9] mb-6">
     Nuestros Productos
+   </h1>
+   <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+    Cremas
    </h2>
    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/tHNqbuzokixyvn2EQuD4jXY2GAe1yxYVdYzD1NU4Bv8.jpg" width="300"/>
+     <img alt="Imagen de un producto de cosmética, frasco de crema facial" class="w-full h-48 object-cover" height="300" src="/img/cremaFacialHialuronico.jpg" width="300"/>
      <div class="p-4">
       <h3 class="text-lg font-semibold text-[#8AA097]">
-       Crema Facial
+       Crema Facial Hialuronico
       </h3>
       <p class="text-gray-600 mt-2">
-       Hidratante y rejuvenecedora.
+       Crema facial hidratante y nutritiva, sus ácidos grasos no permiten que la piel se reseque y se vea opaca. Ayuda con la generación de colágeno generando resistencia y elasticidad en la piel. Siendo parte de tu rutina facial te ayudará a mejorar la elasticidad de tu piel y a mantenerla firme, luminosa e hidratada. Ideal para pieles secas
       </p>
       <div class="flex justify-between items-center mt-4">
        <span class="text-[#8AA097] font-bold">
-        $25.00
+        $20.000
        </span>
        <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Crema Facial" data-price="25.00">
+       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Crema Facial Hialuronico" data-price="20000.00">
         Añadir al Carrito
        </button>
       </div>
      </div>
     </div>
     <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de serum antiarrugas" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/XJzcjAPojRXq6O_4BLk_5B0r-bIIS75KFG3EdlLKRJ8.jpg" width="300"/>
+     <img alt="Imagen de un producto de cosmética, frasco de crema facial con niacinamida" class="w-full h-64 object-cover" height="300" src="/img/cremaFacialNiacinamida.jpg" width="300"/>
      <div class="p-4">
       <h3 class="text-lg font-semibold text-[#8AA097]">
-       Serum Antiarrugas
+       Crema Facial Niacinamida
       </h3>
       <p class="text-gray-600 mt-2">
-       Reduce las líneas de expresión.
+       Crema facial ideal para pieles mixtas y grasas, matifica la piel regulando la producción de sebo y controlando la aparición de acne, hidrata y suaviza la piel. La niacinamida también te ayudará a unificar el tono de la piel y eliminar las marcas que quedaron de anteriores brotes.
       </p>
       <div class="flex justify-between items-center mt-4">
        <span class="text-[#8AA097] font-bold">
-        $30.00
+        $20.000
        </span>
        <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Serum Antiarrugas" data-price="30.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de loción corporal" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/liPGFnZTfoatmBkU_-EyvUUu5I8SY8Yxo6WJQf9FlQk.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Loción Corporal
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Hidratación profunda para la piel.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $20.00
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Loción Corporal" data-price="20.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de tónico facial" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/mHYLPTR0lCUu_nfreDZRz5IKB-ouQvR9O-KbKCXsNno.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Tónico Facial
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Refresca y tonifica la piel.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $18.00
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Tónico Facial" data-price="18.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de exfoliante facial" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/1lIsK9CcVx61RH2Ro0FQkAx-7v9dniKTevJG5rdgQms.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Exfoliante Facial
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Elimina las células muertas.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $22.00
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Exfoliante Facial" data-price="22.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de mascarilla facial" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/6vjJDtBJ1BeQuE2myImN4opoz8ll9zjr3A_rJnJ7xB8.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Mascarilla Facial
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Nutre y revitaliza la piel.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $28.00
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Mascarilla Facial" data-price="28.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de aceite esencial" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/t1JlYeNGf3yb4PNFZ_Jg2e47zkW7JQWdLuoh_tocT_I.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Aceite Esencial
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Relajante y aromático.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $15.00
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Aceite Esencial" data-price="15.00">
-        Añadir al Carrito
-       </button>
-      </div>
-     </div>
-    </div>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-     <img alt="Imagen de un producto de cosmética, frasco de crema de manos" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/i8s_C52itbn3I76ZebQPX-uyKR1PyEeb_nSyVvVRsJk.jpg" width="300"/>
-     <div class="p-4">
-      <h3 class="text-lg font-semibold text-[#8AA097]">
-       Crema de Manos
-      </h3>
-      <p class="text-gray-600 mt-2">
-       Hidratación para manos secas.
-      </p>
-      <div class="flex justify-between items-center mt-4">
-       <span class="text-[#8AA097] font-bold">
-        $12.00
-       </span>
-       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
-       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Crema de Manos" data-price="12.00">
+       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Crema Facial Niacinamida" data-price="20000.00">
         Añadir al Carrito
        </button>
       </div>
      </div>
     </div>
    </div>
-   <div class="hidden fixed top-16 right-4 bg-white shadow-md rounded-lg p-4 w-80" id="cart-container">
-    <h2 class="text-2xl font-bold text-[#D9C0B9] mb-4">
-     Carrito de Compras
-    </h2>
-    <div id="cart-items">
+   <br>
+   <h2 class="text-3x1 font-bold text-[#D9C0B9] mb-6">
+    Shampoo
+   </h2>
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+     <img alt="Imagen de un producto de cosmética, frasco de shampoo sólido personalizado" class="w-full h-48 object-cover" height="300" src="/img/shampooSolido.jpg" width="300"/>
+     <div class="p-4">
+      <h3 class="text-lg font-semibold text-[#8AA097]">
+       Shampoo sólido personalizado
+      </h3>
+      <p class="text-gray-600 mt-2">
+       Ideamos el shampoo que tu cabello necesita. Una barra de 70 gr de activos. Para cabello seco - graso - normal - con caspa - para la caída. Activos a elección como queratina y colágeno
+      </p>
+      <div class="flex justify-between items-center mt-4">
+       <span class="text-[#8AA097] font-bold">
+        $9.500
+       </span>
+       <input class="w-16 text-center border rounded" min="1" type="number" value="1"/>
+       <button class="bg-[#8AA097] text-white px-3 py-1 rounded hover:bg-[#6B8E7A] add-to-cart" data-name="Shampoo sólido personalizado" data-price="9500.00">
+        Añadir al Carrito
+       </button>
+      </div>
+     </div>
     </div>
-    <div class="flex justify-between items-center mt-4">
-     <span class="text-xl font-bold text-[#D9C0B9]">
-      Total:
-     </span>
-     <span class="text-xl font-bold text-[#D9C0B9]" id="cart-total">
-      $0.00
-     </span>
-    </div>
-    <button class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 w-full" id="checkout-button">
-     Finalizar Compra
-    </button>
    </div>
   </main>
+  <div class="hidden fixed top-16 right-4 bg-white shadow-md rounded-lg p-4 w-80" id="cart-container">
+   <h2 class="text-2xl font-bold text-[#D9C0B9] mb-4">
+    Carrito de Compras
+   </h2>
+   <div id="cart-items">
+   </div>
+   <div class="flex justify-between items-center mt-4">
+    <span class="text-xl font-bold text-[#D9C0B9]">
+     Total:
+    </span>
+    <span class="text-xl font-bold text-[#D9C0B9]" id="cart-total">
+     $0.00
+    </span>
+   </div>
+   <button class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 w-full" id="checkout-button">
+    Finalizar Compra
+   </button>
+  </div>
   <footer class="bg-[#D9C0B9] text-white py-12">
     <div class="container mx-auto text-center">
      <p>
-      © 2023 Cosmética Natural. Todos los derechos reservados.
+      © 2025 NUGCHEKUME. Todos los derechos reservados a Tomas Elia Gimenez.
      </p>
      <div class="flex justify-center space-x-4 mt-4">
       <a href="https://www.facebook.com" target="_blank">
